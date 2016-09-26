@@ -13,8 +13,13 @@ fi
 DATE=$(date +%Y%m%d_%H%M)
 DB_NAME=$1
 BUCKET=$2
+PSQL_USER=$3
 
-if [[ $(psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "$DB_NAME") != "0" ]]
+if [ "$PSQL_USER" == "" ]; then
+    PSQL_USER=postgres
+fi
+
+if [[ $(psql -U "$PSQL_USER" -lqt | cut -d \| -f 1 | grep -qw "$DB_NAME") != "0" ]]
 then
     echo "Database does not exist"
     exit 1
