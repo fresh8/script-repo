@@ -19,7 +19,9 @@ if [ "$PSQL_USER" == "" ]; then
     PSQL_USER=postgres
 fi
 
-if [[ $(psql -U "$PSQL_USER" -lqt | cut -d \| -f 1 | grep -qw "$DB_NAME") != "0" ]]
+$(psql -U "$PSQL_USER" -lqt | cut -d \| -f 1 | grep -qw "$DB_NAME")
+EXISTS=$?
+if [[ "$EXISTS" != 0 ]]
 then
     echo "Database does not exist"
     exit 1
