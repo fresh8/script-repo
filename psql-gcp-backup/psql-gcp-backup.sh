@@ -33,9 +33,9 @@ then
     exit 1
 fi
 
-pg_dump -U postgres -h "$PSQL_HOST" "$DB_NAME" > "/tmp/$DB_NAME-dump_$DATE.sql"
-tar cvzf "/tmp/$DB_NAME-dump_$DATE.sql.tar.gz" "/tmp/$DB_NAME-dump_$DATE.sql"
+OUTPUT_FILE="/tmp/$DB_NAME-dump_$DATE.sql.bz2"
 
+pg_dump -U postgres -h "$PSQL_HOST" "$DB_NAME" > "/tmp/$DB_NAME-dump_$DATE.sql"
 LAST_MD5_FILE="/tmp/$DB_NAME-dump-md5"
 if [ -f "$LAST_MD5_FILE" ]; then
   CURRENT_MD5=$(md5sum "/tmp/$DB_NAME-dump_$DATE.sql" | awk '{ print $1 }')
@@ -48,6 +48,7 @@ if [ -f "$LAST_MD5_FILE" ]; then
   fi
 fi
 
+cat "/tmp/$DB_NAME-dump_$DATE.sql" | bzip2 > OUTPUT_FILE
 echo "$CURRENT_MD5" > "$LAST_MD5_FILE"
 
-gsutil -m -h "Cache-Control:no-cache" cp -r "/tmp/$DB_NAME-dump_$DATE.sql.tar.gz" "gs://$BUCKET/"
+gsutil -m -h "Cache-Control:no-cache" cp -r OUTPUT_FILE "gs://$BUCKET/"
