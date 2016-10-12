@@ -48,7 +48,7 @@ if [ -f "$LAST_MD5_FILE" ]; then
   fi
 fi
 
-cat "/tmp/$DB_NAME-dump_$DATE.sql" | bzip2 > "$OUTPUT_FILE"
+bzip2 -c "/tmp/$DB_NAME-dump_$DATE.sql" > "$OUTPUT_FILE"
 echo "$CURRENT_MD5" > "$LAST_MD5_FILE"
 
 gsutil -m -h "Cache-Control:no-cache" cp -r "$OUTPUT_FILE" "gs://$BUCKET/"
