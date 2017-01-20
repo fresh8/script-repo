@@ -19,7 +19,7 @@ then
     exit 1
 fi
 
-OUTPUT_FILE="/tmp/mongodb-$DB_NAME-dump_$DATE.tar.gz"
+OUTPUT_FILE="/tmp/mongodb-$DB_NAME-dump_$DATE.tar.bz2"
 DUMP_DIR=$(mktemp -d)
 
 mongodump -u $MONGODB_USER -p $MONGODB_PASS --host $MONGODB_HOST --db $DB_NAME -o $DUMP_DIR
