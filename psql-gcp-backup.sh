@@ -29,3 +29,5 @@ fi
 
 pg_dump -U postgres "$DB_NAME" > "/tmp/$DB_NAME-dump_$DATE.sql"
 gsutil -m -h "Cache-Control:no-cache" cp -r "/tmp/$DB_NAME-dump_$DATE.sql" "gs://$BUCKET/"
+
+rm /tmp/$DB_NAME-dump_$DATE.sql
