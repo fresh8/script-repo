@@ -54,4 +54,4 @@ echo "$CURRENT_MD5" > "$LAST_MD5_FILE"
 gsutil -m -h "Cache-Control:no-cache" cp -r "$OUTPUT_FILE" "gs://$BUCKET/"
 
 # Remove temporary file
-rm $OUTPUT_FILE
+rm "$OUTPUT_FILE"
