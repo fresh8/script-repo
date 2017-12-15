@@ -33,6 +33,8 @@ then
     exit 1
 fi
 
+echo "Database exists. Preparing dump"
+
 OUTPUT_FILE="/tmp/$DB_NAME-dump_$DATE.sql.bz2"
 
 pg_dump -U postgres -h "$PSQL_HOST" "$DB_NAME" > "/tmp/$DB_NAME-dump_$DATE.sql"
