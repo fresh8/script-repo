@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-
 DATE=$(date +%Y%m%d_%H%M)
-NAMESPACE=$1
-BUCKET=$2
-HOST=$3
 
 if [ "$NAMESPACE" == "" ]; then
     echo "Namespace required"
