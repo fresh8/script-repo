@@ -26,6 +26,6 @@ Update the permissions to allow for execution
 `chmod +x aerospike-gcp-backup.sh`
 
 Run the script
-`./aerospike-gcp-backup.sh <namespace> <bucket name> <host>
+`NAMESPACE=<namespace> BUCKET=<bucket name> HOST=<host> ./aerospike-gcp-backup.sh`
 
 *note: if no host is passed localhost is assumed 
