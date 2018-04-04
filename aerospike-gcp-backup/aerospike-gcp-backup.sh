@@ -13,10 +13,10 @@ if [ "$HOST" == "" ]; then
     HOST=localhost
 fi
 
-OUTPUT_FILE="/tmp/$DB_NAME-dump_$DATE.asb"
+OUTPUT_FILE="/tmp/$NAMESPACE-dump_$DATE.asb"
 
 asbackup --host $HOST --namespace $NAMESPACE --output-file - > $OUTPUT_FILE
-LAST_MD5_FILE="/tmp/$DB_NAME-dump-md5"
+LAST_MD5_FILE="/tmp/$NAMESPACE-dump-md5"
 if [ -f "$LAST_MD5_FILE" ]; then
   CURRENT_MD5=$(md5sum $OUTPUT_FILE | awk '{ print $1 }')
   LAST_MD5=$(cat "$LAST_MD5_FILE")
