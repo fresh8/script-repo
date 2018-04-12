@@ -55,5 +55,6 @@ echo "$CURRENT_MD5" > "$LAST_MD5_FILE"
 
 gsutil -m -h "Cache-Control:no-cache" cp -r "$OUTPUT_FILE" "gs://$BUCKET/"
 
-# Remove temporary file
+# Remove temporary files
 rm "$OUTPUT_FILE"
+rm "/tmp/$DB_NAME-dump_$DATE.sql"
